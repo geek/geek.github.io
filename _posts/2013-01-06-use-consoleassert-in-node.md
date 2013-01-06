@@ -45,6 +45,7 @@ suite.add('require("assert")', function () {
 ```
 
 The output of running the above benchmark is:
+
 ```
 console.assert x 525 ops/sec ±0.28% (98 runs sampled)
 require("assert") x 327 ops/sec ±0.31% (95 runs sampled)
@@ -87,10 +88,8 @@ Even faster still is creating a shortcut to `console.assert` to prevent the extr
 ```javascript
 var assert = console.assert;
 
-function getUser (id) {
-	
+var getUser function (id) {
 	assert(id, 'id is required');
-	...
 }
 ```
 
