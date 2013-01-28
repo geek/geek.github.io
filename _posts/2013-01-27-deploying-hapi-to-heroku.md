@@ -25,7 +25,6 @@ The important thing to note is that heroku sets an environmental variable for th
 
 ```
   var Hapi = require('hapi');
-  
   var server = new Hapi.Server(+process.env.PORT, '0.0.0.0');
 ```
 
@@ -40,5 +39,6 @@ When you are ready to deploy to heroku follow the terminal commands below to cre
 3. `git push heroku master`
 4. `heroku ps:scale web=1`
 5. `heroku open`
+
 
 Thats it, the browser should open and your site should appear.
