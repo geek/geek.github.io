@@ -18,7 +18,7 @@ Before beginning create an account on [heroku](http://www.heroku.com/) and insta
 After this you will need to create a hapi project.  To make it easy I created a simple project that you can clone.
 
 ```
-  git clone git://github.com/wpreul/hapi-heroku.git
+git clone git://github.com/wpreul/hapi-heroku.git
 ```
 
 ### Site code
@@ -26,9 +26,9 @@ After this you will need to create a hapi project.  To make it easy I created a 
 The important thing to note is that heroku sets an environmental variable for the PORT that it expects your site to listen and that hapi expects the port to be a number.  Therefore, you will need to convert the `process.env.PORT` to a number in the server constructor.  Below is the code to do this:
 
 ```
-  var Hapi = require('hapi');
-  
-  var server = new Hapi.Server(+process.env.PORT, '0.0.0.0');
+var Hapi = require('hapi');
+
+var server = new Hapi.Server(+process.env.PORT, '0.0.0.0');
 ```
 
 After this, everything is business as usual; add your routes and handlers then start the server.
