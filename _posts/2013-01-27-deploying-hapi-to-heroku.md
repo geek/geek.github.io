@@ -8,9 +8,11 @@ tags: ["Node", "hapi"]
 {% include JB/setup %}
 
 ### Introduction
+
 Deploying a site that depends on hapi is quite easy.  However, I still think it is important to walk through the process as is may not seem completely obvious.
 
 ### Prerequisites
+
 Before beginning create an account on [heroku](http://www.heroku.com/) and install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
 After this you will need to create a hapi project.  To make it easy I created a simple project that you can clone.

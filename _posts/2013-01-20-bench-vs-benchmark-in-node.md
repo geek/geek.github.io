@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "bench vs benchmark in node"
-description: ""
+description: "Learn about some of the differences between these two benchmarking tools"
 category: "Node"
 tags: ["Node"]
 ---
