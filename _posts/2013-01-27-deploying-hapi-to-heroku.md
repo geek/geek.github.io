@@ -31,10 +31,10 @@ After this, everything is business as usual; add your routes and handlers then s
 
 When you are ready to deploy to heroku follow the terminal commands below to create and push your code to your heroku site.
 
-1. `heroku login`
-2. `heroku create`
-3. `git push heroku master`
-4. `heroku ps:scale web=1`
-5. `heroku open`
+  1. `heroku login`
+  2. `heroku create`
+  3. `git push heroku master`
+  4. `heroku ps:scale web=1`
+  5. `heroku open`
 
 Thats it, the browser should open and your site should appear.
