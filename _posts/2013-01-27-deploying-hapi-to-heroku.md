@@ -27,6 +27,7 @@ The important thing to note is that heroku sets an environmental variable for th
 
 ```
   var Hapi = require('hapi');
+  
   var server = new Hapi.Server(+process.env.PORT, '0.0.0.0');
 ```
 
