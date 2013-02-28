@@ -3,7 +3,7 @@ layout: post
 title: "Deploying hapi to heroku"
 description: "Learn how to deploy a hapi site to heroku"
 category: "Node"
-tags: ["Node", "hapi"]
+tags: ["Node"]
 ---
 {% include JB/setup %}
 

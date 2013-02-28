@@ -2,8 +2,8 @@
 layout: post
 title: "Node HTTP Response Splitting"
 description: ""
-category: 
-tags: ["node", "security"]
+category: "Node"
+tags: ["Node"]
 ---
 
 Web application developer should be aware of the HTTP Response Splitting threat.  Fortunately, there have efforts to add protections against this threat in the core Node.js code.  That being said, the protections are not widespread and there is a possibility for them to be bypassed.
@@ -19,30 +19,25 @@ To learn more about HTTP response splitting please visit the Web Application Sec
 The following is a perfectly valid HTTP Response to a single request.
 
 
-```
-HTTP/1.1 200 OK
-Content-Length: 0
- 
-HTTP/1.1 200 OK
-Content-Type: text/html
-Content-Length: 19
- 
-<html>HACKED</html>
-Date: Sat, 02 Feb 2013 18:35:04 GMT
-Connection: keep-alive
-```
+	HTTP/1.1 200 OK
+	Content-Length: 0
+	 
+	HTTP/1.1 200 OK
+	Content-Type: text/html
+	Content-Length: 19
+	 
+	<html>HACKED</html>
+	Date: Sat, 02 Feb 2013 18:35:04 GMT
+	Connection: keep-alive
 
 The above response was generated using only the `ServerResponse.prototype.writeHead` function.  Below is the code that generates the previous response (Node.js 0.8.18).
 
-```javascript
-var http = require('http');
- 
-http.createServer(function (req, res) {
-  res.writeHead(200, { 'Content-Length': '0\r\n\r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 19\r\n\r\n<html>HACKED</html>' });
-  res.end();
-}).listen(8000, '127.0.0.1');
-
-```
+	var http = require('http');
+	 
+	http.createServer(function (req, res) {
+	  res.writeHead(200, { 'Content-Length': '0\r\n\r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 19\r\n\r\n<html>HACKED</html>' });
+	  res.end();
+	}).listen(8000, '127.0.0.1');
 
 When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
 
