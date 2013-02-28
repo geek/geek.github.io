@@ -35,7 +35,6 @@ Connection: keep-alive
 The above response was generated using only the `ServerResponse.prototype.writeHead` function.  Below is the code that generates the previous response (Node.js 0.8.18).
 
 ```javascript
-
 var http = require('http');
  
 http.createServer(function (req, res) {
@@ -46,5 +45,7 @@ http.createServer(function (req, res) {
 ```
 
 When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
+
+
 
 {% include JB/setup %}
