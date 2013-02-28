@@ -18,17 +18,19 @@ To learn more about HTTP response splitting please visit the Web Application Sec
 
 The following is a perfectly valid HTTP Response to a single request.
 
-`
-  HTTP/1.1 200 OK
-  Content-Length: 0
-   
-  HTTP/1.1 200 OK
-  Content-Type: text/html
-  Content-Length: 19
-   
-  <html>HACKED</html>
-  Date: Sat, 02 Feb 2013 18:35:04 GMT
-  Connection: keep-alive
-`
+```
+HTTP/1.1 200 OK
+Content-Length: 0
+ 
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 19
+ 
+<html>HACKED</html>
+Date: Sat, 02 Feb 2013 18:35:04 GMT
+Connection: keep-alive
+```
+
+
 
 {% include JB/setup %}
