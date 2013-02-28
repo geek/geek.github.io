@@ -35,14 +35,16 @@ Connection: keep-alive
 The above response was generated using only the `ServerResponse.prototype.writeHead` function.  Below is the code that generates the previous response (Node.js 0.8.18).
 
 ```
+
 var http = require('http');
  
 http.createServer(function (req, res) {
   res.writeHead(200, { 'Content-Length': '0\r\n\r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 19\r\n\r\n<html>HACKED</html>' });
   res.end();
 }).listen(8000, '127.0.0.1');
+
 ```
 
-
+When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
 
 {% include JB/setup %}
