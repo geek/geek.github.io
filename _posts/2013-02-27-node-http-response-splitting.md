@@ -34,7 +34,7 @@ Connection: keep-alive
 
 The above response was generated using only the `ServerResponse.prototype.writeHead` function.  Below is the code that generates the previous response (Node.js 0.8.18).
 
-```
+```javascript
 
 var http = require('http');
  
