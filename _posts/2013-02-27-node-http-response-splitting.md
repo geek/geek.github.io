@@ -43,7 +43,7 @@ When Safari makes a request to this server it will render the message body from 
 
 <img src="/assets/img/fig-1-1.png" style="max-width: 638px" />
 
-Figure 1.1
+	Figure 1.1
 
 ## Browser Defenses
 
