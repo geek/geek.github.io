@@ -68,7 +68,7 @@ The above error only shows in Chrome, other browsers do not have similar message
 
 The previous example didn’t demonstrate how an attacker is able to compromise a response; instead it demonstrated how sloppy coding is able to split a response.  In the following we will explore several vulnerabilities that result from allowing untrusted data to enter the HTTP response head.  It should be noted at this point that there are Node.js defenses that were added in versions 0.8.20 and 0.9.4.  However, these defenses do not exist in Node.js versions prior to 0.9.4 or 0.8.20.  The next section will explore these protections and how they mitigate most response splitting attacks. 
 
-#### Location Header
+## Location Header
 
 While in the previous examples we looked at creating an entirely new HTTP status line and response headers, this is not always necessary to split a response.  Instead, if an attacker controls a header value and the Content-Length value hasn’t been sent the attacker can prematurely send the response body.  In other words, the attacker sets the Content-Length to that of their custom message body and then sends their body above the response the application intends to send.  This is easily demonstrated using the Location header. 
 
@@ -111,7 +111,7 @@ Below is the code in that is used to protect against response splitting in Node.
   			
 The above code is found in Node.js versions 0.8.20+ and 0.9.4+.  It replaces a CR or a LF along with any following spaces or tabs with an empty string.  This means that you cannot bypass the protection with a payload like \r\r\n\n as every unwanted character is removed.  Also, double encoding CRLF into %250D%250A won’t work either, as it will not be decoded after the value is set.  
 
-#### Bypassing the Protections
+## Bypassing the Protections
 
 The standard protections that exist in Node.js are sufficient for any standard deployment.  However, there are still a couple of ways that the protection can be bypassed or even used to help an attacker.  If the attacker double encodes the CRLF characters and your setup has an intermediary that decodes the response before it reaches the client then it’s likely the application is vulnerable to response splitting.  Therefore, special care should be given to all downstream processing that occurs after the application sends a response.
 
