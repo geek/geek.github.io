@@ -78,12 +78,11 @@ Typically in a RESTful application after a resource is created a 201 response wi
 	  var item = url.parse(req.url, true).query.item;
 	  res.writeHead(201, { 'Location': 'http://127.0.0.1:8080/' + item });
 	  res.end();
-	 
 	}).listen(8000, '127.0.0.1');
 		
 Now when a request comes in with the following URL it will split the response.
 
-http://localhost:8000/create?item=%0d%0aContent-Length:%205%0d%0a%0d%0asplit
+	http://localhost:8000/create?item=%0d%0aContent-Length:%205%0d%0a%0d%0asplit
 
 Figure 1.3 below shows the output from the request.
 
