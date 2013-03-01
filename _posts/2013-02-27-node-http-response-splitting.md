@@ -41,7 +41,7 @@ The above response was generated using only the `ServerResponse.prototype.writeH
 
 When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
 
-<img src="/assets/img/fig-1-1.png" />
+<img src="/assets/img/fig-1-1.png" style="max-width: 638px" />
 
 Figure 1.1
 
@@ -58,7 +58,7 @@ In Chrome there is a warning that will appear for responses that have duplicate 
 		
 The error that is displayed by Chrome is shown below in figure 1.2.
 
-<img src="/assets/img/fig-1-2.png" />
+<img src="/assets/img/fig-1-2.png" style="max-width: 638px" />
 
 Figure 1.2
 
@@ -90,13 +90,13 @@ http://localhost:8000/create?item=%0d%0aContent-Length:%205%0d%0a%0d%0asplit
 
 Figure 1.3 below shows the output from the request.
 
-<img src="/assets/img/fig-1-3.png" />
+<img src="/assets/img/fig-1-3.png" style="max-width: 638px" />
 
 Figure 1.3
 
 The entire response is still sent to the client, only the browser is told to only render the first 5 characters of the body.  If the request is changed to have a Content-Length of 11 the headers after Location will be rendered (Figure 1.4 below).
 
-<img src="/assets/img/fig-1-4.png" />
+<img src="/assets/img/fig-1-4.png" style="max-width: 638px" />
 
 Figure 1.4
 
