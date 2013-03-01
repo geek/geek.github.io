@@ -42,8 +42,7 @@ The above response was generated using only the `ServerResponse.prototype.writeH
 When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
 
 <img src="/assets/img/fig-1-1.png" style="max-width: 638px" />
-
-	Figure 1.1
+  Figure 1.1
 
 ## Browser Defenses
 
@@ -59,8 +58,7 @@ In Chrome there is a warning that will appear for responses that have duplicate 
 The error that is displayed by Chrome is shown below in figure 1.2.
 
 <img src="/assets/img/fig-1-2.png" style="max-width: 638px" />
-
-Figure 1.2
+  Figure 1.2
 
 The above error only shows in Chrome, other browsers do not have similar messages for this response.  Even though the protection exists, it’s not reliable to depend entirely on it.  When users encounter an error message like this one, they are likely not going to understand what it means.  Furthermore, the attacker only needs to add the double CRLF to terminate the first response header for Chrome to resume the assumption that there are two valid responses to the single request.
 
