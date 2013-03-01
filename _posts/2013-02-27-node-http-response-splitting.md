@@ -63,7 +63,7 @@ The above error only shows in Chrome, other browsers do not have similar message
 
 ## Vulnerability Examples
 
-The previous example didn’t demonstrate how an attacker is able to compromise a response; instead it demonstrated how sloppy coding is able to split a response.  In the following we will explore several vulnerabilities that result from allowing untrusted data to enter the HTTP response head.  It should be noted at this point that there are Node.js defenses that were added in versions 0.8.20 and 0.9.4.  However, these defenses do not exist in Node.js versions prior to 0.9.4 or 0.8.20.  The next section will explore these protections and how they mitigate most response splitting attacks. 
+The previous example didn’t demonstrate how an attacker is able to compromise a response; instead it demonstrated how sloppy coding is able to split a response.  In the following we will explore a couple of vulnerabilities that result from allowing untrusted data to enter the HTTP response head.  It should be noted at this point that there are Node.js defenses that were added in versions 0.8.20 and 0.9.4.  However, these defenses do not exist in Node.js versions prior to 0.9.4 or 0.8.20.  The next section will explore these protections and how they mitigate most if not all response splitting attacks. 
 
 ## Location Header
 
