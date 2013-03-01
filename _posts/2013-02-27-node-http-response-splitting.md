@@ -107,7 +107,7 @@ The above code is found in Node.js versions 0.8.20+ and 0.9.4+.  It replaces a C
 
 ## Bypassing the Protections
 
-The standard protections that exist in Node.js are sufficient for any standard deployment.  However, there are still a couple of ways that the protection can be bypassed or even used to help an attacker.  If the attacker double encodes the CRLF characters and your setup has an intermediary that decodes the response before it reaches the client then it’s likely the application is vulnerable to response splitting.  Therefore, special care should be given to all downstream processing that occurs after the application sends a response.
+The standard protections that exist in Node.js are sufficient for any standard deployment.  However, there are still a couple of ways that the protection can be bypassed or even used to help an attacker.  If the attacker double encodes the CRLF characters and your setup has an intermediary that decodes the response before it reaches the client then it’s likely the application is vulnerable to response splitting.  Therefore, special care should be given to all processing that occurs after the application sends a response.
 
 Another potential threat is the ability for an attacker to smuggle an invalid header value past a validator.  This is achievable by combining the \r or \n characters with the invalid header value.  For example, if an application has a blacklisted header value of ‘HACK’ an attacker could bypass the check by making the value ‘H\nA\rC\nK’ and letting the protection code strip out the \n and \r characters.  Of course, this is a non-issue if the application uses a whitelist of allowed values.
 
