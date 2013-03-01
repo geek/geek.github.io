@@ -42,7 +42,7 @@ The above response was generated using only the `ServerResponse.prototype.writeH
 When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
 
 <img src="/assets/img/fig-1-1.png" style="max-width: 638px" />
-  Figure 1.1
+	_Figure 1.1_
 
 ## Browser Defenses
 
@@ -58,7 +58,7 @@ In Chrome there is a warning that will appear for responses that have duplicate 
 The error that is displayed by Chrome is shown below in figure 1.2.
 
 <img src="/assets/img/fig-1-2.png" style="max-width: 638px" />
-  Figure 1.2
+	_Figure 1.2_
 
 The above error only shows in Chrome, other browsers do not have similar messages for this response.  Even though the protection exists, it’s not reliable to depend entirely on it.  When users encounter an error message like this one, they are likely not going to understand what it means.  Furthermore, the attacker only needs to add the double CRLF to terminate the first response header for Chrome to resume the assumption that there are two valid responses to the single request.
 
@@ -89,14 +89,12 @@ http://localhost:8000/create?item=%0d%0aContent-Length:%205%0d%0a%0d%0asplit
 Figure 1.3 below shows the output from the request.
 
 <img src="/assets/img/fig-1-3.png" style="max-width: 638px" />
-
-Figure 1.3
+	_Figure 1.3_
 
 The entire response is still sent to the client, only the browser is told to only render the first 5 characters of the body.  If the request is changed to have a Content-Length of 11 the headers after Location will be rendered (Figure 1.4 below).
 
 <img src="/assets/img/fig-1-4.png" style="max-width: 638px" />
-
-Figure 1.4
+	_Figure 1.4_
 
 ## Node.js Protections
 
