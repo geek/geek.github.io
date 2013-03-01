@@ -2,7 +2,7 @@
 layout: post
 title: "Use console.assert in node"
 description: "There is a handy shortcut in the node.js global `console` to check if an expression is true and throw an exception if it's not.  The shortcut is `console.assert` and will perform the same action as executing `require('assert').ok."
-category: "Node"
+category: "node"
 tags: ["Node"]
 ---
 {% include JB/setup %}

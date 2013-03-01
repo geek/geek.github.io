@@ -2,7 +2,7 @@
 layout: post
 title: "Node HTTP Response Splitting"
 description: ""
-category: "Node"
+category: "node"
 tags: ["Node"]
 ---
 
@@ -41,6 +41,6 @@ The above response was generated using only the `ServerResponse.prototype.writeH
 
 When Safari makes a request to this server it will render the message body from the second part of the response (figure 1.1).
 
-
+<img src="/assets/img/fig-1-1.jpg" />
 
 {% include JB/setup %}
