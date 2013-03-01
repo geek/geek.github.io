@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Node HTTP Response Splitting"
-description: ""
+description: "Overview of how response splitting works and protections that exist in node for it."
 category: "node"
 tags: ["Node"]
 ---
@@ -29,7 +29,7 @@ The following is a perfectly valid HTTP Response to a single request.
 	Date: Sat, 02 Feb 2013 18:35:04 GMT
 	Connection: keep-alive
 
-The above response was generated using only the `ServerResponse.prototype.writeHead` function.  Below is the code that generates the previous response (Node.js 0.8.18).
+The above response was generated using only the _'ServerResponse.prototype.writeHead'_ function.  Below is the code that generates the previous response (Node.js 0.8.18).
 
 	var http = require('http');
 	 
