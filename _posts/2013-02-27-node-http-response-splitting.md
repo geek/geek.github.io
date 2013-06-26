@@ -20,11 +20,11 @@ The following is a perfectly valid HTTP Response to a single request.
 
 	HTTP/1.1 200 OK
 	Content-Length: 0
-	 
+
 	HTTP/1.1 200 OK
 	Content-Type: text/html
 	Content-Length: 19
-	 
+
 	<html>HACKED</html>
 	Date: Sat, 02 Feb 2013 18:35:04 GMT
 	Connection: keep-alive
@@ -32,7 +32,7 @@ The following is a perfectly valid HTTP Response to a single request.
 The above response was generated using only the _'ServerResponse.prototype.writeHead'_ function.  Below is the code that generates the previous response (Node.js 0.8.18).
 
 	var http = require('http');
-	 
+
 	http.createServer(function (req, res) {
 	  res.writeHead(200, { 'Content-Length': '0\r\n\r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 19\r\n\r\n<html>HACKED</html>' });
 	  res.end();
@@ -53,7 +53,7 @@ In Chrome there is a warning that will appear for responses that have duplicate 
 	  res.writeHead(200, { 'Content-Length': '0\r\nHTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 19\r\n\r\n<html>HACKED</html>' });
 	  res.end();
 	}).listen(8000, '127.0.0.1');
-		
+
 The error that is displayed by Chrome is shown below in figure 1.2.
 
 <img src="/assets/img/fig-1-2.png" style="max-width: 638px" />
@@ -63,23 +63,23 @@ The above error only shows in Chrome, other browsers do not have similar message
 
 ## Vulnerability Examples
 
-The previous example didn’t demonstrate how an attacker is able to compromise a response; instead it demonstrated how sloppy coding is able to split a response.  In the following we will explore a couple of vulnerabilities that result from allowing untrusted data to enter the HTTP response head.  It should be noted at this point that there are Node.js defenses that were added in versions 0.8.20 and 0.9.4.  However, these defenses do not exist in Node.js versions prior to 0.9.4 or 0.8.20.  The next section will explore these protections and how they mitigate most if not all response splitting attacks. 
+The previous example didn’t demonstrate how an attacker is able to compromise a response; instead it demonstrated how sloppy coding is able to split a response.  In the following we will explore a couple of vulnerabilities that result from allowing untrusted data to enter the HTTP response head.  It should be noted at this point that there are Node.js defenses that were added in versions 0.8.20 and 0.9.4.  However, these defenses do not exist in Node.js versions prior to 0.9.4 or 0.8.20.  The next section will explore these protections and how they mitigate most if not all response splitting attacks.
 
 ## Location Header
 
-While in the previous examples we looked at creating an entirely new HTTP status line and response headers, this is not always necessary to split a response.  Instead, if an attacker controls a header value and the Content-Length value hasn’t been sent the attacker can prematurely send the response body.  In other words, the attacker sets the Content-Length to that of their custom message body and then sends their body above the response the application intends to send.  This is easily demonstrated using the Location header. 
+While in the previous examples we looked at creating an entirely new HTTP status line and response headers, this is not always necessary to split a response.  Instead, if an attacker controls a header value and the Content-Length value hasn’t been sent the attacker can prematurely send the response body.  In other words, the attacker sets the Content-Length to that of their custom message body and then sends their body above the response the application intends to send.  This is easily demonstrated using the Location header.
 
 Typically in a RESTful application after a resource is created a 201 response will be sent to the client along with the URI of where the new resource can be found.  If the resource name is in the URI and is not encoded before being added to the Location header value then the application is vulnerable to HTTP response splitting.  Below is an example of an application that meets these criteria.
 
 	var http = require('http');
 	var url  = require("url");
-	 
+
 	http.createServer(function (req, res) {
 	  var item = url.parse(req.url, true).query.item;
 	  res.writeHead(201, { 'Location': 'http://127.0.0.1:8080/' + item });
 	  res.end();
 	}).listen(8000, '127.0.0.1');
-		
+
 Now when a request comes in with the following URL it will split the response.
 
 	http://localhost:8000/create?item=%0d%0aContent-Length:%205%0d%0a%0d%0asplit
@@ -102,8 +102,8 @@ Below is the code in that is used to protect against response splitting in Node.
 
 	if (/[\r\n]/.test(value))
   		value = value.replace(/[\r\n]+[ \t]*/g, '');
-  			
-The above code is found in Node.js versions 0.8.20+ and 0.9.4+.  It replaces a CR or a LF along with any following spaces or tabs with an empty string.  This means that you cannot bypass the protection with a payload like \r\r\n\n as every unwanted character is removed.  Also, double encoding CRLF into %250D%250A won’t work either, as it will not be decoded after the value is set.  
+
+The above code is found in Node.js versions 0.8.20+ and 0.9.4+.  It replaces a CR or a LF along with any following spaces or tabs with an empty string.  This means that you cannot bypass the protection with a payload like \r\r\n\n as every unwanted character is removed.  Also, double encoding CRLF into %250D%250A won’t work either, as it will not be decoded after the value is set.
 
 ## Bypassing the Protections
 
