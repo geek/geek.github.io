@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Use console.assert in node | Wyatt</title>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">	
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel="alternate" type="application/rss+xml" title="Feed" href="/rss.xml">
+</head>
+<body>
+	
+
+<div class="menu">
+	<a href="http://github.com/geek" title="Follow me on github"><i class="icon-github icon-large"></i></a>
+	&nbsp;
+	<a href="http://twitter.com/wpreul" title="Follow me on twitter"><i class="icon-twitter icon-large"></i></a>
+	&nbsp;
+	<a href="https://www.linkedin.com/in/nodejs" title="LinkedIn Profile"><i class="icon-linkedin icon-large"></i></a>
+</div>
+
+<section id="wrapper" class="group">
+	<header id="header">
+		<a id="title" href="/">Words from Wyatt</a>
+	</header>
+
+	<article class="post">
+		<header>
+			<h1>Use console.assert in node</h1>
+			<h2 class="headline">A handy shortcut to ease some pains </h2>
+		</header>
+		<section id="post-body">
+			
+
+<h3>Using console.assert instead of require('assert')</h3>
+
+<p>There is a handy shortcut in the node.js global <code>console</code> to check if an expression is true and throw an exception if it's not.  The shortcut is <code>console.assert</code> and will perform the same action as executing <code>require('assert').ok</code>.  This is particularly useful for validating incoming parameters to a function.  Below is an example that checks if required parameter is provided and throw an exception if it's missing.</p>
+
+<pre><code>function getUser (id) {
+    console.assert(id, 'ID is required');
+    ...
+}
+</code></pre>
+
+<p>Traditionally, you would either have a helper assert function or would manually need to check that the ID is valid and then throw an Error.</p>
+
+<h3>Prefer console.assert shortcut</h3>
+
+<p>Even faster still is creating a shortcut to <code>console.assert</code> to prevent the extra lookup.  I would place this near the module requires and call it assert.  This should be safe as long as you do not depend on the assert module for anything outside of the default <code>ok</code> function.  Below is an example:</p>
+
+<pre><code>var assert = console.assert;
+
+function getUser (id) {
+    assert(id, 'id is required');
+    ...
+}
+</code></pre>
+
+<h3>Footnote</h3>
+
+<p>In researching this post I noticed that the <code>assert.ok</code> function actually checks <code>!!!(expression)</code> while <code>console.assert</code> is doing <code>!(expression)</code>.  Interestingly, they will both have the same result.  This would be untrue if you were checking <code>(expression)</code> vs. <code>!!(expression)</code>.  But, ! will convert the expression to a boolean, so you don't have to worry about truthiness.</p>
+
+
+		</section>
+		
+		<footer id="post-meta" class="clearfix">
+			<div><span>Authored </span> Jun 1 2013</div>
+
+			<section id="sharing">
+				<a class="twitter" href="https://twitter.com/share"><span class="icon-twitter-circled"></span></a>
+
+				<a class="facebook" href="#" 
+				  onclick="
+				    window.open(
+				      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+				      'facebook-share-dialog', 
+				      'width=626,height=436'); 
+				    return false;"><span class="icon-facebook-circled"></span> 
+				</a>
+
+			</section> 
+		</footer> 
+	</article>
+
+	<footer>
+	<nav id="post-nav">
+		<span class="prev">
+			
+				<a href='/posts/node-response-splitting.html'>
+					<span class="arrow">&larr;</span> Node HTTP Response Splitting
+				</a>
+			
+		</span>
+		
+
+		<span class="next">
+			
+				<a href='/posts/deploying-hapi-to-modulus.html'>
+					Deploying hapi to modulus <span class="arrow">&rarr;</span>
+				</a>
+			
+		</span>
+	</nav>
+	</footer>
+</section> 
+
+
+
+	
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/static/js/main.js"></script>
+	
+</body>
+</html>

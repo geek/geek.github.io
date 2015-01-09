@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Deploying hapi to heroku | Wyatt</title>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">	
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel="alternate" type="application/rss+xml" title="Feed" href="/rss.xml">
+</head>
+<body>
+	
+
+<div class="menu">
+	<a href="http://github.com/geek" title="Follow me on github"><i class="icon-github icon-large"></i></a>
+	&nbsp;
+	<a href="http://twitter.com/wpreul" title="Follow me on twitter"><i class="icon-twitter icon-large"></i></a>
+	&nbsp;
+	<a href="https://www.linkedin.com/in/nodejs" title="LinkedIn Profile"><i class="icon-linkedin icon-large"></i></a>
+</div>
+
+<section id="wrapper" class="group">
+	<header id="header">
+		<a id="title" href="/">Words from Wyatt</a>
+	</header>
+
+	<article class="post">
+		<header>
+			<h1>Deploying hapi to heroku</h1>
+			<h2 class="headline">Learn how to deploy a hapi site to heroku. </h2>
+		</header>
+		<section id="post-body">
+			
+
+<h3>Introduction</h3>
+
+<p>Deploying a site that depends on hapi is quite easy.  However, I still think it is important to walk through the process as is may not seem completely obvious.</p>
+
+<h3>Prerequisites</h3>
+
+<p>Before beginning create an account on <a href="http://www.heroku.com/">heroku</a> and install the <a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a>.</p>
+
+<p>After this you will need to create a hapi project.  To make it easy I created a simple project that you can clone.</p>
+
+<pre><code>git clone git://github.com/wpreul/hapi-heroku.git
+</code></pre>
+
+<h3>Site code</h3>
+
+<p>The important thing to note is that heroku sets an environmental variable for the PORT that it expects your site to listen and that hapi expects the port to be a number.  Therefore, you will need to convert the <code>process.env.PORT</code> to a number in the server constructor.  Below is the code to do this:</p>
+
+<pre><code>var Hapi = require('hapi');
+
+var server = new Hapi.Server(+process.env.PORT, '0.0.0.0');
+</code></pre>
+
+<p>After this, everything is business as usual; add your routes and handlers then start the server.</p>
+
+<h3>Deploying to heroku</h3>
+
+<p>When you are ready to deploy to heroku follow the terminal commands below to create and push your code to your heroku site.</p>
+
+<ol>
+<li><code>heroku login</code></li>
+<li><code>heroku create</code></li>
+<li><code>git push heroku master</code></li>
+<li><code>heroku ps:scale web=1</code></li>
+<li><code>heroku open</code></li>
+</ol>
+
+<p>Thats it, the browser should open and your site should appear.</p>
+
+
+		</section>
+		
+		<footer id="post-meta" class="clearfix">
+			<div><span>Authored </span> Jan 27 2013</div>
+
+			<section id="sharing">
+				<a class="twitter" href="https://twitter.com/share"><span class="icon-twitter-circled"></span></a>
+
+				<a class="facebook" href="#" 
+				  onclick="
+				    window.open(
+				      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+				      'facebook-share-dialog', 
+				      'width=626,height=436'); 
+				    return false;"><span class="icon-facebook-circled"></span> 
+				</a>
+
+			</section> 
+		</footer> 
+	</article>
+
+	<footer>
+	<nav id="post-nav">
+		<span class="prev">
+			
+				<a href='/posts/bench-benchmark.html'>
+					<span class="arrow">&larr;</span> bench vs benchmark
+				</a>
+			
+		</span>
+		
+
+		<span class="next">
+			
+				<a href='/posts/node-response-splitting.html'>
+					Node HTTP Response Splitting <span class="arrow">&rarr;</span>
+				</a>
+			
+		</span>
+	</nav>
+	</footer>
+</section> 
+
+
+
+	
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/static/js/main.js"></script>
+	
+</body>
+</html>
