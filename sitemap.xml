@@ -39,4 +39,25 @@
 	</url>
 	
 
+	
+	<url>
+		<changefreq>daily</changefreq>
+		<priority>1.0</priority>
+	</url>
+	
+
+	
+	<url>
+		<changefreq>daily</changefreq>
+		<priority>1.0</priority>
+	</url>
+	
+
+	
+	<url>
+		<changefreq>daily</changefreq>
+		<priority>1.0</priority>
+	</url>
+	
+
 </urlset>
