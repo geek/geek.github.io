@@ -1,140 +1,216 @@
-title: What's Not Being Said
-date: 29-03-2016
-headline: A missing perspective on #leftpadgate
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% extends "post.html" %}
-{% block body %}
+	<title>What&#39;s Not Being Said | Wyatt</title>
+	<link rel="shortcut icon" href="/static/images/favicon.ico">	
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+	<link rel="alternate" type="application/rss+xml" title="Feed" href="/rss.xml">
+</head>
+<body>
+	
 
-{% filter markdown %}
+<div class="menu">
+	<a href="http://github.com/geek" title="Follow me on github"><i class="icon-github icon-large"></i></a>
+	&nbsp;
+	<a href="http://twitter.com/wpreul" title="Follow me on twitter"><i class="icon-twitter icon-large"></i></a>
+	&nbsp;
+	<a href="https://www.linkedin.com/in/nodejs" title="LinkedIn Profile"><i class="icon-linkedin icon-large"></i></a>
+</div>
 
+<section id="wrapper" class="group">
+	<header id="header">
+		<a id="title" href="/">Words from Wyatt</a>
+	</header>
 
-The responses to
-[#leftpadgate](http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm)
-have mostly been coming from outsiders to JavaScript and Node.js.
+	<article class="post">
+		<header>
+			<h1>What&#39;s Not Being Said</h1>
+			<h2 class="headline">A missing perspective on #leftpadgate </h2>
+		</header>
+		<section id="post-body">
+			
 
-Here they are:
+<p>The responses to
+<a href="http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm">#leftpadgate</a>
+have mostly been coming from outsiders to JavaScript and Node.js.</p>
 
-1. [haneycodes](http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/)
-2. [daveaglick](http://daveaglick.com/posts/some-thoughts-on-microdependencies-npm-and-node)
-3. [pocoo](http://lucumr.pocoo.org/2016/3/24/open-source-trust-scaling/)
+<p>Here they are:</p>
 
-<br>
-What follows is my Node.js dev perspective.
+<ol>
+<li><a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/">haneycodes</a></li>
+<li><a href="http://daveaglick.com/posts/some-thoughts-on-microdependencies-npm-and-node">daveaglick</a></li>
+<li><a href="http://lucumr.pocoo.org/2016/3/24/open-source-trust-scaling/">pocoo</a></li>
+</ol>
 
-### Immutable packages and Docker
+<p><br>
+What follows is my Node.js dev perspective.</p>
 
-One of the complaints about packages living in the npm registry is that they
+<h3>Immutable packages and Docker</h3>
+
+<p>One of the complaints about packages living in the npm registry is that they
 aren't immutable.  While immutability is usually a descriptive enough term, in
 this case its leading to some confusion about the reality of the npm registry.
-Its true that you can run `npm unpublish` and have a package deleted, you
+Its true that you can run <code>npm unpublish</code> and have a package deleted, you
 cannot, however, republish the same version of a package twice.  If you attempt
-to do this, you will get a 403 with the following message:
+to do this, you will get a 403 with the following message:</p>
 
-``` You cannot publish over the previously published version ```
+<p><code>You cannot publish over the previously published version</code></p>
 
-Therefore, I think its more helpful to be clear when describing the issue.
+<p>Therefore, I think its more helpful to be clear when describing the issue.
 Instead of saying that npm should provide an immutable registry, we should be
 saying that a registry shouldn't allow a package to be deleted.  Moreover, a
-registry shouldn't allow the removal of a package to break other packages.
+registry shouldn't allow the removal of a package to break other packages.</p>
 
-[Docker Hub](https://hub.docker.com/) also allows you to delete a published
-image.
+<p><a href="https://hub.docker.com/">Docker Hub</a> also allows you to delete a published
+image.</p>
 
-<img src="/static/images/docker-delete.png" />
+<p><img src="/static/images/docker-delete.png" /></p>
 
-If you try to pull from a deleted image you will get an error:
+<p>If you try to pull from a deleted image you will get an error:</p>
 
-``` Error: image d0cker/blah not found ```
+<p><code>Error: image d0cker/blah not found</code></p>
 
-Additionally, you can create a different image with the same name and tag and
-publish it to the same location in the registry.
+<p>Additionally, you can create a different image with the same name and tag and
+publish it to the same location in the registry.</p>
 
-Why doesn't docker hub have this same issue?  In some ways it does, you can
-prevent a `docker pull` command from succeeding.  However, a published docker
+<p>Why doesn't docker hub have this same issue?  In some ways it does, you can
+prevent a <code>docker pull</code> command from succeeding.  However, a published docker
 image that depends on an unpublished docker image won't suddenly break.  This is
 different because the dependency is resolved at build time: the layer composing
-the parent image become part of the current image, and are pulled by their digest.
+the parent image become part of the current image, and are pulled by their digest.</p>
 
-The Node.js package.json offers a similar solution, you can use
-[`bundledDependencies`](https://docs.npmjs.com/files/package.json#bundleddependencies)
+<p>The Node.js package.json offers a similar solution, you can use
+<a href="https://docs.npmjs.com/files/package.json#bundleddependencies"><code>bundledDependencies</code></a>
 to bundle the code of your dependencies into your published tarball.  In fact,
-ESLint [moved to
-bundledDependencies](https://github.com/eslint/eslint/pull/5676), something that
-was [proposed](https://github.com/eslint/eslint/issues/5013) even before the
-recent event.
+ESLint <a href="https://github.com/eslint/eslint/pull/5676">moved to
+bundledDependencies</a>, something that
+was <a href="https://github.com/eslint/eslint/issues/5013">proposed</a> even before the
+recent event.</p>
 
-I am personally in favor of being able to delete a package from a registry.  It
+<p>I am personally in favor of being able to delete a package from a registry.  It
 only makes sense when you consider that we are people, and people make mistakes.
 Even more, if you can't delete a package from a registry, and that package has
 known vulnerabilities in it, you are now doing more harm than good by allowing
-it to be served.
+it to be served.</p>
 
-All of that being said, npm does need to change their implementation.  A
+<p>All of that being said, npm does need to change their implementation.  A
 developer shouldn't be able delete a package that others are using, unless they
-have a valid reason to do so.  In which case, `npm unpublish` should prompt them
+have a valid reason to do so.  In which case, <code>npm unpublish</code> should prompt them
 for reasoning, which will submit an issue to npm support for review.
-[Here](https://github.com/npm/npm/issues/12127) is one proposal for how this
-work can begin to be done.
+<a href="https://github.com/npm/npm/issues/12127">Here</a> is one proposal for how this
+work can begin to be done.</p>
 
-### Fragility
+<h3>Fragility</h3>
 
-Another common complaint about left-pad and many of the modules on npm is that they
+<p>Another common complaint about left-pad and many of the modules on npm is that they
 are too small and really shouldn't live out in the wild.  Instead, they should
 be baked into JavaScript or your projects central code.  I definitely agree with
 this sentiment.  That being said, there is definitely merit to break out
-functions that shouldn't change from code that likely will.
+functions that shouldn't change from code that likely will.</p>
 
-One of the major selling points with Docker is the layered approach to building
+<p>One of the major selling points with Docker is the layered approach to building
 an image.  This has the benefit of only needing to pull down the layers of
 your image that have changed.  In the same way, when you separate functions that
 won't change into published modules, you are able to make upgrades easier as you
-*should* only need to worry about enhancements in more complex modules.  There
+<em>should</em> only need to worry about enhancements in more complex modules.  There
 is also the benefit of having these more stable modules cached, so when you run
-`npm update` you only pull down modules that are frequent to change.
+<code>npm update</code> you only pull down modules that are frequent to change.</p>
 
-There is always a risk with depending on any code that you don't control or at
+<p>There is always a risk with depending on any code that you don't control or at
 least have access to.  This is one of the reasons why all of the dependencies
-that [hapi](https://www.npmjs.com/package/hapi) has are under the same github org.
+that <a href="https://www.npmjs.com/package/hapi">hapi</a> has are under the same github org.</p>
 
-I am not going to say that there isn't fragility by some or even many of the
+<p>I am not going to say that there isn't fragility by some or even many of the
 packages published on npm.  What I will say is that fragility is not inherent in
 npm or Node.js, as some people are implying.  As with any sizeable diverse
-developer community, there will be software with varying degrees of fragility.
+developer community, there will be software with varying degrees of fragility.</p>
 
-### The JavaScript Ecosystem
+<h3>The JavaScript Ecosystem</h3>
 
-Another common response to the event is people framing the discussion around
+<p>Another common response to the event is people framing the discussion around
 the JavaScript ecosystem, the Node.js ecosystem, or the npm ecosystem.  While
 all of this is true, it doesn't cut to the heart of the situation.  The modules
-that were most impacted were React, [Babel, and
-atom](http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm). These are
+that were most impacted were React, <a href="http://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm">Babel, and
+atom</a>. These are
 certainly popular modules, but in reality, are not modules that are used by
 hapi, express, or restify.  In which case, I think its more accurate to frame
 the discussion around the front-end npm ecosystem.  Even this can be too broad,
-as there are plenty of front-end developers who don't use React or Babel.
+as there are plenty of front-end developers who don't use React or Babel.</p>
 
-This reframing of the discussion is important, as we should be clear about
+<p>This reframing of the discussion is important, as we should be clear about
 which Node.js sub-communities were impacted.  Otherwise, there is a potential
-for people to think that all of Node.js, npm, or the Internet suddenly broke.
+for people to think that all of Node.js, npm, or the Internet suddenly broke.</p>
 
-### Resolution
+<h3>Resolution</h3>
 
-If this event dissuades anyone from adopting Node.js, I have to wonder if there
+<p>If this event dissuades anyone from adopting Node.js, I have to wonder if there
 was any hope for them to even adopt Node.js in the first place.  In reality,
 this event reveals that Node.js is becoming more and more popular, and that its
-leaders are well equipped to deal with edge case events!
+leaders are well equipped to deal with edge case events!</p>
 
-There is perhaps an even greater revelation brought about by this event, which
-is that many Node.js outsiders are necessarily fearful of its growing popularity.
+<p>There is perhaps an even greater revelation brought about by this event, which
+is that many Node.js outsiders are necessarily fearful of its growing popularity.</p>
 
-Even if that is the case, we do have work to do.  I have put forward a [couple](https://github.com/npm/npm/issues/12127) of
-[proposals](https://github.com/nodejs/TSC/issues/79), as have others in the
+<p>Even if that is the case, we do have work to do.  I have put forward a <a href="https://github.com/npm/npm/issues/12127">couple</a> of
+<a href="https://github.com/nodejs/TSC/issues/79">proposals</a>, as have others in the
 community.  Hopefully, this will serve as a learning experience for everyone and
-we can do something to prevent it from occuring again.
+we can do something to prevent it from occuring again.</p>
 
-### Credits
-A special thank you to [Matteo Collina](https://github.com/mcollina/) for reviewing
-this post.
+<h3>Credits</h3>
 
-{% endfilter %}
-{% endblock body %}
+<p>A special thank you to <a href="https://github.com/mcollina/">Matteo Collina</a> for reviewing
+this post.</p>
+
+
+		</section>
+		
+		<footer id="post-meta" class="clearfix">
+			<div><span>Authored </span> Mar 29 2016</div>
+
+			<section id="sharing">
+				<a class="twitter" href="https://twitter.com/share"><span class="icon-twitter-circled"></span></a>
+
+				<a class="facebook" href="#" 
+				  onclick="
+				    window.open(
+				      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+				      'facebook-share-dialog', 
+				      'width=626,height=436'); 
+				    return false;"><span class="icon-facebook-circled"></span> 
+				</a>
+
+			</section> 
+		</footer> 
+	</article>
+
+	<footer>
+	<nav id="post-nav">
+		<span class="prev">
+			
+				<a href='/posts/node-foundation-board-nomination.html'>
+					<span class="arrow">&larr;</span> Node Foundation Board Nomination
+				</a>
+			
+		</span>
+		
+
+		<span class="next">
+			
+		</span>
+	</nav>
+	</footer>
+</section> 
+
+
+
+	
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/static/js/main.js"></script>
+	
+</body>
+</html>
