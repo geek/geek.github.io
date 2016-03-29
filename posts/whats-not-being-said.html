@@ -87,10 +87,12 @@ the parent image become part of the current image, and are pulled by their diges
 <p>The Node.js package.json offers a similar solution, you can use
 <a href="https://docs.npmjs.com/files/package.json#bundleddependencies"><code>bundledDependencies</code></a>
 to bundle the code of your dependencies into your published tarball.  In fact,
-ESLint <a href="https://github.com/eslint/eslint/pull/5676">moved to
+ESLint <a href="https://github.com/eslint/eslint/pull/5676">tried to move to
 bundledDependencies</a>, something that
 was <a href="https://github.com/eslint/eslint/issues/5013">proposed</a> even before the
-recent event.</p>
+recent event.  However, in a more recent version of ESLint, they did revert that
+decision.  Its not entirely clear yet if <code>bundledDependencies</code> are a
+<a href="http://eslint.org/blog/2016/03/eslint-v2.5.3-released#rolling-back-of-bundled-dependencies">straightforward solution</a>.</p>
 
 <p>I am personally in favor of being able to delete a package from a registry.  It
 only makes sense when you consider that we are people, and people make mistakes.
@@ -122,8 +124,10 @@ is also the benefit of having these more stable modules cached, so when you run
 <code>npm update</code> you only pull down modules that are frequent to change.</p>
 
 <p>There is always a risk with depending on any code that you don't control or at
-least have access to.  This is one of the reasons why all of the dependencies
-that <a href="https://www.npmjs.com/package/hapi">hapi</a> has are under the same github org.</p>
+least have access to.  This is one of the reasons why most of the dependencies
+that <a href="https://www.npmjs.com/package/hapi">hapi</a> has are under the same github org.
+hapi strives to limit external dependencies that are beyond the control of the
+core team.</p>
 
 <p>I am not going to say that there isn't fragility by some or even many of the
 packages published on npm.  What I will say is that fragility is not inherent in
@@ -139,8 +143,7 @@ that were most impacted were React, <a href="http://blog.npmjs.org/post/14157728
 atom</a>. These are
 certainly popular modules, but in reality, are not modules that are used by
 hapi, express, or restify.  In which case, I think its more accurate to frame
-the discussion around the front-end npm ecosystem.  Even this can be too broad,
-as there are plenty of front-end developers who don't use React or Babel.</p>
+the discussion around the specific communities that were impacted.</p>
 
 <p>This reframing of the discussion is important, as we should be clear about
 which Node.js sub-communities were impacted.  Otherwise, there is a potential
@@ -156,15 +159,17 @@ leaders are well equipped to deal with edge case events!</p>
 <p>There is perhaps an even greater revelation brought about by this event, which
 is that many Node.js outsiders are necessarily fearful of its growing popularity.</p>
 
-<p>Even if that is the case, we do have work to do.  I have put forward a <a href="https://github.com/npm/npm/issues/12127">couple</a> of
+<p>Even if that is the case, we do have work to do.  I have put forward a
+<a href="https://github.com/npm/npm/issues/12127">couple</a> of
 <a href="https://github.com/nodejs/TSC/issues/79">proposals</a>, as have others in the
 community.  Hopefully, this will serve as a learning experience for everyone and
 we can do something to prevent it from occuring again.</p>
 
-<h3>Credits</h3>
+<h3>Credits A special thank you to [Matteo</h3>
 
-<p>A special thank you to <a href="https://github.com/mcollina/">Matteo Collina</a> for reviewing
-this post.</p>
+<h3>Collina](https://github.com/mcollina/) and [Colin</h3>
+
+<h3>Ihrig](https://github.com/cjihrig) for reviewing this post.</h3>
 
 
 		</section>
