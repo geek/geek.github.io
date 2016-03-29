@@ -97,6 +97,16 @@ for reasoning, which will submit an issue to npm support for review.
 <a href="https://github.com/npm/npm/issues/12127">Here</a> is one proposal for how this
 work can begin to be done.</p>
 
+<h4>Update - npm has a new unpublish policy</h4>
+
+<p>See <a href="http://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy">http://blog.npmjs.org/post/141905368000/changes-to-npms-unpublish-policy</a></p>
+
+<p>The new policy should fix almost every future issue.  The only edge case is if
+you happen to depend on a package thats less than 24 hours old.  The solution to
+that problem is even simpler, don't depend on a version of a package thats less
+than 24 hours old. Now we just need for npm to add a warning when someone
+attempts to install a version thats less than 24 hours old.</p>
+
 <h3>Fragility</h3>
 
 <p>Another common complaint about left-pad and many of the modules on npm is that they
