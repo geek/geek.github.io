@@ -24,7 +24,13 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.green {
+.date {
+    color: #aaa;
+    padding-left: 14px;
+}
+
+.description {
+	font: italic 14px/1.4em Georgia,serif;
     color:#1BBC9B;
 }
 
@@ -516,7 +522,7 @@ hr {
 .bg-services .row .fa {
     width: 40px;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 5px;
     color: #1BBC9B;
 }
 
